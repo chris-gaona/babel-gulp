@@ -44,11 +44,10 @@ function userTemplate(name, avatar) {
   let safeName = xss.inHTMLData(name);
   let safeAvatar = xss.inHTMLData(avatar);
 
-  let template = `
-      <div class="active-avatar">
-      <img width="54" src="assets/images/${safeAvatar}">
-      <h5 class="post-author">${safeName}</h5>
-      </div>`;
+  let template = `<div class="active-avatar">
+                    <img width="54" src="assets/images/${safeAvatar}">
+                    <h5 class="post-author">${safeName}</h5>
+                  </div>`;
 
   return template;
 }
