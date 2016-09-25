@@ -53,9 +53,16 @@ Object.defineProperty(exports, "__esModule", {
 });
 var ui = {
   renderPosts: function renderPosts(posts) {
-    console.log(posts);
+    var elements = posts.map(function (post) {
+      return articleTemplate;
+    });
+
+    var target = document.querySelector(".container");
+    target.innerHTML = elements.join('');
   }
 };
+
+var articleTemplate = "<article class='post'>\n                          <h2 class='post-title'>\n                            In hybrid moments, give me a moment\n                          </h2>\n                          <p class='post-meta'>\n                            last reply on July 15, 1997\n                          </p>\n                        </article>";
 
 exports.default = ui;
 
