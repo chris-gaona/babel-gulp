@@ -1,7 +1,13 @@
+import xss from "xss-filters";
+
 let ui = {
   renderPosts(posts) {
     let elements = posts.map( (post) => {
-      return articleTemplate;
+      let {title, lastReply} = post;
+      // the previous line is the same as doing the following:
+      // let title = post.title;
+      // let lastReply = post.lastReply;
+      return articleTemplate(title, lastReply);
     });
 
     let target = document.querySelector(".container");
@@ -9,13 +15,19 @@ let ui = {
   }
 }
 
-let articleTemplate = `<article class='post'>
-                          <h2 class='post-title'>
-                            In hybrid moments, give me a moment
-                          </h2>
-                          <p class='post-meta'>
-                            last reply on July 15, 1997
-                          </p>
-                        </article>`
+function articleTemplate(title, lastReply) {
+  let safeTitle = xss.inHTMLData(title);
+  let safeLastReply = xss.inHTMLData(lastReply);
+
+  let template = `<article class='post'>
+                    <h2 class='post-title'>
+                      ${safeTitle}
+                    </h2>
+                    <p class='post-meta'>
+                      last reply on ${safeLastReply}
+                    </p>
+                  </article>`
+  return template;
+}
 
 export default ui;
