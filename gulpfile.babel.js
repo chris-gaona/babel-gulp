@@ -8,7 +8,7 @@ gulp.task("transpile", () => {
     .transform("babelify")
     .bundle()
     .pipe(source("bundle.js"))
-    .pipe(gulp.dest("dist"));
+    .pipe(gulp.dest("public/dist"));
 
 });
 
